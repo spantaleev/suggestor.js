@@ -149,7 +149,7 @@
 			this.$container.html(createHtml(this.items, this.currentIndex));
 
 			this.$container.css({
-				"top": this.context.$textField.offset().top + this.context.$textField.height(),
+				"top": this.context.$textField.offset().top + this.context.$textField.outerHeight(),
 				"left": this.context.$textField.offset().left
 			});
 		},

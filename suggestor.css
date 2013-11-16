@@ -1,5 +1,6 @@
 .suggestor-container {
 	position: absolute;
+	margin-top: 1px;
 }
 
 .suggestor-picker {
