@@ -306,16 +306,18 @@ The results for each query are cached and reused automatically.
 
 `````javascript
 (function () {
+	var dataSource = new Suggestor.PerQueryDataSource(function (query, callback) {
+		var uri = "/some/path/_suggest?query=" + query;
+
+		$.getJSON(uri, function (response) {
+			callback(response.tags);
+		});
+	});
+
 	$('#js-textarea-suggestor').suggestor({
 		"startDelimiter": "#",
 		"suggestionsTemplate": "tags",
-		"dataSource": new Suggestor.PerQueryDataSource(function (query, callback) {
-			var uri = "/some/path/_suggest?query=" + query;
-
-			$.getJSON(uri, function (response) {
-				callback(response.tags);
-			});
-		}
+		"dataSource": dataSource
 	});
 })();
 `````
