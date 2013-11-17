@@ -374,17 +374,24 @@
 	};
 
 	var setupEventHandlers = function ($textField, settings) {
-		var lastQuery = null;
-		$textField.on('keyup change', function (ev) {
-			var query = settings.queryExtractor.getQuery();
+		var lastQuery = null,
+			bufferringQueue = null;
 
+		$textField.on('keyup change', function () {
+			window.clearTimeout(bufferringQueue);
+
+			var query = settings.queryExtractor.getQuery();
 			if (!query) {
 				lastQuery = null;
 				settings.suggestionsRenderer.close();
 				return;
 			}
 
-			if (query !== lastQuery) {
+			if (query === lastQuery) {
+				return;
+			}
+
+			var processQuery = function () {
 				lastQuery = query;
 				settings.dataSource.suggest(query, function (items) {
 					validateItems(items);
@@ -398,7 +405,9 @@
 						settings.suggestionsRenderer.open();
 					}
 				});
-			}
+			};
+
+			bufferringQueue = window.setTimeout(processQuery, settings.bufferringInterval);
 		});
 
 		$textField.on('blur', function () {
@@ -414,6 +423,10 @@
 		var settings = $.extend({}, {
 			//The (single character) delimiter that identifies where a suggestion starts
 			"startDelimiter": "@",
+
+			//Time to wait (in milliseconds) before suggestions are requested.
+			//Useful for rate-limiting the number of requests to the data-source.
+			"bufferringInterval": 0,
 
 			//A textarea/input query extractor - see Suggestor.QueryExtractor
 			"queryExtractor": new Suggestor.QueryExtractor(new Suggestor.TextFieldHelper()),

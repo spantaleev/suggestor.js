@@ -302,7 +302,7 @@ Multiple instances for the same text field.
 
 Per-query data source.
 No local matching is performed by default - the server is supposed to return only entries that match.
-The results for each query are cached and reused automatically.
+The server gets hit if the query has remained the same for **150 ms**. Results are cached and reused automatically.
 
 `````javascript
 (function () {
@@ -317,6 +317,7 @@ The results for each query are cached and reused automatically.
 	$('#js-textarea-suggestor').suggestor({
 		"startDelimiter": "#",
 		"suggestionsTemplate": "tags",
+		"bufferringInterval": 150,
 		"dataSource": dataSource
 	});
 })();
