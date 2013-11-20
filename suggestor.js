@@ -353,7 +353,7 @@
 		_suggest: function (query, items, callback) {
 			//If the query changed, ignore this "out-of-order" response.
 			if (this.lastQuery === query) {
-				var ds = new Suggestor.LocalDataSource(items, this.matcher);
+				var ds = new Suggestor.LocalDataSource(items, null, this.matcher);
 				ds.suggest(query, callback);
 			}
 		}
