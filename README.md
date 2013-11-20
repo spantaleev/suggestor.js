@@ -307,7 +307,7 @@ The server gets hit if the query has remained the same for **150 ms**. Results a
 `````javascript
 (function () {
 	var dataSource = new Suggestor.PerQueryDataSource(function (query, callback) {
-		var uri = "/some/path/_suggest?query=" + query;
+		var uri = "/some/path/_suggest?query=" + encodeURIComponent(query);
 
 		$.getJSON(uri, function (response) {
 			callback(response.tags);
