@@ -1,0 +1,132 @@
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>
+		Suggestor.js example
+	</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../suggestor.js"></script>
+	<link rel="stylesheet" href="../suggestor.css" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<a href="https://github.com/spantaleev/suggestor.js" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+	<div id="wrapper">
+		<h1 class="main-title">suggestor.js</h1>
+		<p>
+			<a href="https://github.com/spantaleev/suggestor.js" target="_blank">suggestor.js</a> is a suggestions-providing / @user mentions / #tagging / autocompletion library.<br />
+			It's similar to <a href="http://jakiestfu.github.io/Mention.js/" target="_blank">Mention.js</a>, but does NOT depend on Twitter Bootstrap and Typeahead. <br />
+			It's also less hacky, more flexible and supposedly much less buggy. <br />
+		</p>
+		<br />
+		<div class="example">
+			<h1 class="example-title">Example 1 - predefined tags</h1>
+			<div class="example-container">
+				<p>
+					Simple tag suggestions, triggered by a <span class="example-highlight">#</span>. <br />
+					The predefined tags suggestions template is used, which influences how the suggestions list looks like.
+					<script src="https://gist.github.com/beastafk/7500979.js"></script>
+				</p>
+				<p class="try">
+					Try it here:
+					<br />
+					<span class="tooltip">for example, type: <span>#g</span></span>
+				</p>
+				<input id="js-textarea-suggestor-example-1" type="text" autocomplete="off" />
+			</div>
+		</div>
+		<script type="text/javascript">
+		(function () {
+			var dataSet = [
+				{"id": "github"},
+				{"id": "gmail"},
+				{"id": "facebook"},
+				{"id": "twitter"}
+			];
+
+			$('#js-textarea-suggestor-example-1').suggestor({
+				"startDelimiter": "#",
+				"suggestionsTemplate": "tags",
+				"dataSource": new Suggestor.LocalDataSource(dataSet)
+			});
+		})();
+		</script>
+
+		<div class="example">
+			<h1 class="example-title">Example 2 - additional keywords and limit number of suggestions</h1>
+			<div class="example-container">
+				<p>
+					In this case additional keywords by which you can search are added to each item.
+					<br />
+					The number of suggestions is <strong>limited</strong> to 2.
+					"<span class="example-highlight">#social</span>" would trigger suggestions for "#github" and "#facebook" <span class="example-highlight">ONLY</span>, not for "#twitter".
+					<script src="https://gist.github.com/beastafk/7504961.js"></script>
+				</p>
+				<p class="try">
+					Try it here:
+					<br />
+					<span class="tooltip">for example, type: <span>#social</span></span>
+				</p>
+				<input id="js-textarea-suggestor-example-2" type="text" autocomplete="off" value="I love using " />
+			</div>
+		</div>
+		<script type="text/javascript">
+		(function() {
+			var dataSet = [
+				{"id": "github", "keywords": ["github", "social", "version-control"]},
+				{"id": "gmail", "keywords": ["gmail", "google", "mail"]},
+				{"id": "facebook", "keywords": ["facebook", "social"]},
+				{"id": "twitter", "keywords": ["twitter", "social"]}
+			];
+
+			var suggestionsLimit = 2;
+
+			$('#js-textarea-suggestor-example-2').suggestor({
+				"startDelimiter": "#",
+				"suggestionsTemplate": "tags",
+				"dataSource": new Suggestor.LocalDataSource(dataSet, suggestionsLimit)
+			});
+		})();
+		</script>
+
+		<div class="example">
+			<h1 class="example-title">Example 3 - Lazily-loaded data set with custom template</h1>
+			<div class="example-container">
+				<p>
+					Lazily-loaded data set from a URL, instead of a local/hardcoded data set plus dynamically building the HTML for each suggestion entry. <br />
+					Also this time suggestions are triggered with <span class="example-highlight">@</span>.
+					<script src="https://gist.github.com/beastafk/7505708.js"></script>
+				</p>
+				<p class="try">
+					Try it here:
+					<br />
+					<span class="tooltip">for example, type: <span>@g</span></span>
+				</p>
+				If running the demo locally, the example may not work (due to local cross-origin request policies).
+				<input id="js-textarea-suggestor-example-3" type="text" autocomplete="off" />
+			</div>
+		</div>
+		<script type="text/javascript">
+			(function() {
+				$('#js-textarea-suggestor-example-3').suggestor({
+					"startDelimiter": "@",
+					"suggestionsTemplateHtml": function (item) {
+						var imageUrl = 'https://www.google.com/s2/favicons?domain=' + item.domain;
+						return "<img src='" + imageUrl + "' /> <strong>" + item.id + "</strong> (" + item.users + ")";
+					},
+					"dataSource": new Suggestor.LazilyLoadedDataSource(function (callback) {
+						var pathToJson = "data-set-domains.json";
+						$.getJSON(pathToJson, function (response) {
+						    callback(response.domains);
+						});
+					})
+				});
+			})();
+		</script>
+		<br />
+		<p>More examples and information could be found <a href="https://github.com/spantaleev/suggestor.js" target="_blank">on the suggestor.js page</a></p>
+		<footer>
+			&copy; 2013 <a href="http://devture.com" target="_blank">Devture Ltd</a>
+		</footer>
+	</div>
+</body>
