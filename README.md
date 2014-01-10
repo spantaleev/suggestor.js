@@ -3,9 +3,12 @@ suggestor.js
 
 **suggestor.js** is a suggestions-providing / @user mentions / #tagging / autocompletion library.
 
+![screenshot](https://raw.github.com/spantaleev/suggestor.js/master/demo/screenshot.jpg)
+
 It's similar to [Mention.js](https://github.com/jakiestfu/Mention.js), but does NOT depend on [Twitter Bootstrap and Typeahead](https://github.com/twitter/bootstrap).
 It's also less hacky, more flexible and supposedly much less buggy.
 
+**View the demo [here](http://devture.com/projects/suggestor.js)**.
 
 Dependencies
 ------------
