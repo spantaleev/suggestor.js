@@ -150,6 +150,30 @@ In this case the number of suggestions is limited to 2.
 
 ### Example 4
 
+Example of using insertKey option to control the value inserted into the textarea. 
+Note that doing this prevents the default templates from working because they explicitly look for ID, so we must build our own.
+
+`````javascript
+(function () {
+	var dataSet = [
+		{"id": "1", "site": "github"},
+		{"id": "2", "site": "gmail"},
+		{"id": "3", "site": "facebook"},
+		{"id": "4", "site": "twitter"}
+	];
+
+	$('#js-textarea-suggestor').suggestor({
+		"startDelimiter": "#",
+		"suggestionsTemplateHtml": "%site%",
+		"insertKey": "site",
+		"dataSource": new Suggestor.LocalDataSource(dataSet)
+	});
+})();
+`````
+
+
+### Example 5
+
 In this case a custom suggestions template is used.
 The template uses `%placeholder%` variables, which come from the extra fields items in the data set have.
 
@@ -171,7 +195,7 @@ The template uses `%placeholder%` variables, which come from the extra fields it
 `````
 
 
-### Example 5
+### Example 6
 
 Similar to the example above, but uses a function to dynamically build the HTML for each suggestion entry.
 This allows for more flexibility than mere `%placeholder%` substitution.
@@ -197,7 +221,7 @@ This allows for more flexibility than mere `%placeholder%` substitution.
 `````
 
 
-### Example 6
+### Example 7
 
 User mentions/suggestions triggered by @query (the start delimiter is "@").
 
@@ -236,7 +260,7 @@ The template requires each entry to have the following additional data fields: `
 `````
 
 
-### Example 7
+### Example 8
 
 Lazily-loaded data set from a URL, instead of a local/hardcoded data set.
 This is only about loading a complete static data-set lazily, not for doing per-query loading from remote. Check the other example for that.
@@ -269,7 +293,7 @@ Supposing that `/path/to/data-set-tags.json` returns this response:
 `````
 
 
-### Example 8
+### Example 9
 
 Multiple instances for the same text field.
 
@@ -301,7 +325,7 @@ Multiple instances for the same text field.
 `````
 
 
-### Example 9
+### Example 10
 
 Per-query data source.
 No local matching is performed by default - the server is supposed to return only entries that match.
@@ -338,7 +362,7 @@ Supposing that `/some/path/_suggest?query=g` returns a similar response:
 `````
 
 
-### Example 10
+### Example 11
 
 Advanced example that overrides the default suggestions utilization logic.
 
@@ -370,7 +394,7 @@ Advanced example that overrides the default suggestions utilization logic.
 `````
 
 
-### Example 11
+### Example 12
 
 Advanced example that overrides the default matching logic.
 
