@@ -84,7 +84,7 @@
 				state = this.textFieldHelper.getState($textField, this.context.settings.startDelimiter),
 				textBefore = state.text.substring(0, state.queryStartPosition),
 				textAfter = state.text.substring(state.queryEndPosition),
-				suggestionValue = (this.context.settings.startDelimiter + suggestionItem.id);
+				suggestionValue = (this.context.settings.startDelimiter + suggestionItem[this.context.settings.insertKey]);
 
 			this.context.$textField.val(textBefore + suggestionValue + textAfter);
 			$textField[0].selectionStart = $textField[0].selectionEnd = (textBefore + suggestionValue).length;
@@ -423,6 +423,9 @@
 		var settings = $.extend({}, {
 			//The (single character) delimiter that identifies where a suggestion starts
 			"startDelimiter": "@",
+
+			//The json key to insert
+			"insertKey": "id",
 
 			//Time to wait (in milliseconds) before suggestions are requested.
 			//Useful for rate-limiting the number of requests to the data-source.
