@@ -84,10 +84,11 @@
 				state = this.textFieldHelper.getState($textField, this.context.settings.startDelimiter),
 				textBefore = state.text.substring(0, state.queryStartPosition),
 				textAfter = state.text.substring(state.queryEndPosition),
-				suggestionValue = (this.context.settings.startDelimiter + suggestionItem[this.context.settings.insertKey]);
+				suggestionValue = (this.context.settings.startDelimiter + suggestionItem[this.context.settings.insertKey]),
+				finalSuggestionValue = this.context.settings.insertPrepend + suggestionValue + this.context.settings.insertAppend;
 
-			this.context.$textField.val(textBefore + suggestionValue + textAfter);
-			$textField[0].selectionStart = $textField[0].selectionEnd = (textBefore + suggestionValue).length;
+			this.context.$textField.val(textBefore + finalSuggestionValue + textAfter);
+			$textField[0].selectionStart = $textField[0].selectionEnd = (textBefore + finalSuggestionValue).length;
 
 			//Restore focus to the text field, if it got lost (due to a suggestions list click)
 			$textField.focus();
@@ -427,6 +428,12 @@
 			//The json key to insert
 			"insertKey": "id",
 
+			//prepend inserted value with this
+			"insertPrepend": '',
+
+			//append inserted value with this
+			"insertAppend": '',
+
 			//Time to wait (in milliseconds) before suggestions are requested.
 			//Useful for rate-limiting the number of requests to the data-source.
 			"bufferringInterval": 0,
@@ -445,6 +452,7 @@
 
 			//A textarea/input suggestion utilizer - see Suggestor.SuggestionsUtilizer
 			"suggestionsUtilizer": new Suggestor.SuggestionsUtilizer(new Suggestor.TextFieldHelper())
+
 		}, options);
 
 		validateSettings(settings);
