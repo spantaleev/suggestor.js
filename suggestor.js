@@ -92,6 +92,9 @@
 
 			//Restore focus to the text field, if it got lost (due to a suggestions list click)
 			$textField.focus();
+
+			//fire utilize event
+			jQuery($textField).trigger('utilize-mention', suggestionItem);
 		}
 	};
 
