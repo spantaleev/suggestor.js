@@ -1,5 +1,5 @@
-suggestor.js
-============
+a better suggestor.js
+=====================
 
 **suggestor.js** is a suggestions-providing / @user mentions / #tagging / autocompletion library.
 
@@ -9,6 +9,8 @@ It's similar to [Mention.js](https://github.com/jakiestfu/Mention.js), but does 
 It's also less hacky, more flexible and supposedly much less buggy.
 
 **View the demo [here](http://devture.com/projects/suggestor.js)**.
+
+This fork adds some advanced features that haven't been merged into master. The gem's creator, for whatever reason, seems to have abandoned the project. See [recent commits](https://github.com/subvertallchris/suggestor.js/commits/master), the code is commented and simple enough to read.
 
 Dependencies
 ------------
