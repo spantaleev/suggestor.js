@@ -402,6 +402,14 @@ Advanced example that overrides the default matching logic.
 `````
 
 
+Other configuration options
+---------------------------
+
+There are additional configuration settings (`allowEmptyQueries`, `autoCloseOnSingleExactMatch`, etc).
+
+See `settings` in the source code.
+
+
 Doing more
 ----------
 
@@ -420,7 +428,6 @@ Look at the source code for more information.
 Areas for improvement
 ---------------------
 
- * Empty querying - being able to enter "@" to get the full list of suggestions
  * Empty delimiter querying - getting suggestions for any word without having to enter a delimiter
  * Automatic HTML-escaping of `%placeholder%` variables in templates
  * More examples and documentation
