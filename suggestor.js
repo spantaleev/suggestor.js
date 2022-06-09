@@ -1,4 +1,4 @@
-/** suggestor.js 1.1 - BSD licensed - https://github.com/spantaleev/suggestor.js **/
+/** suggestor.js 1.1.1 - BSD licensed - https://github.com/spantaleev/suggestor.js **/
 
 (function ($) {
 	window.Suggestor = {};

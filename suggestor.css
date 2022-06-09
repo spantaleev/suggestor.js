@@ -40,10 +40,6 @@
 	color: #808080;
 }
 
-.suggestor-suggestion-active .suggestor-picker-tooltip {
-	color: #f7f5f5;
-}
-
 .suggestor-image {
 	margin-right: 5px;
 	display: inline-block;
