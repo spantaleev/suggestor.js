@@ -381,8 +381,13 @@
 			window.clearTimeout(bufferringQueue);
 
 			var query = settings.queryExtractor.getQuery();
-			if (!query) {
+			if (query === null) {
 				lastQuery = null;
+				settings.suggestionsRenderer.close();
+				return;
+			}
+			if (query === '' && !settings.allowEmptyQueries) {
+				lastQuery = query;
 				settings.suggestionsRenderer.close();
 				return;
 			}
@@ -426,6 +431,9 @@
 
 			//The json key to insert
 			"insertKey": "id",
+
+			//Specifies whether to allow empty queries (with only a prefix) to trigger suggestions (e.g. `@`, as opposed to `@<character>`)
+			"allowEmptyQueries": false,
 
 			//Time to wait (in milliseconds) before suggestions are requested.
 			//Useful for rate-limiting the number of requests to the data-source.
