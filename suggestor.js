@@ -403,7 +403,7 @@
 
 					if (items.length === 0) {
 						settings.suggestionsRenderer.close();
-					} else if (items.length === 1 && items[0].id === query) {
+					} else if (items.length === 1 && items[0].id === query && settings.autoCloseOnSingleExactMatch) {
 						settings.suggestionsRenderer.close();
 					} else {
 						settings.suggestionsRenderer.set(items);
@@ -434,6 +434,9 @@
 
 			//Specifies whether to allow empty queries (with only a prefix) to trigger suggestions (e.g. `@`, as opposed to `@<character>`)
 			"allowEmptyQueries": false,
+
+			//Specifies whether the suggestions list should close when the query matches (`item.id === query`) a single item only
+			"autoCloseOnSingleExactMatch": true,
 
 			//Time to wait (in milliseconds) before suggestions are requested.
 			//Useful for rate-limiting the number of requests to the data-source.
