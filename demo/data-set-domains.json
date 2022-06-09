@@ -1,8 +1,8 @@
 {
 	"domains": [
-		{"id": "github", "users": "1+ million", "domain": "github.com"},
+		{"id": "github", "users": "70+ million", "domain": "github.com"},
+		{"id": "gitlab", "users": "1+ million", "domain": "gitlab.com"},
 		{"id": "gmail", "users": "400+ million", "domain": "gmail.com"},
-		{"id": "google+", "users": "50+ million", "domain": "plus.google.com"},
 		{"id": "facebook", "users": "1+ billion", "domain": "facebook.com"},
 		{"id": "twitter", "users": "200+ million", "domain": "twitter.com"},
 		{"id": "youtube", "users": "500+ million", "domain": "youtube.com"},
